@@ -4,7 +4,7 @@
 ---
 
 ### Description
-**TBD:** The final project proposal is a succinct overview of your design strategy, and is an essential step in your final project progress. The proposal serves three purposes: (1) apply lecture concepts to a real-world project of your design while getting experience responding to CfPs/RfPs (calls/requests for proposals), (2) negotiate expectations of the final project with us to ensure that your project is of sufficient merit and to avoid feature creep, and (3) allot time early in the design process to collaborative outline your conceptual design and team responsibilities before starting coding, ultimately saving you time. The proposal is organized into three sections.
+This collaborative project is an interactive geospatial analysis platform developed as part of the GEOG575 course. The project enables users to visualize, explore, and analyze spatial data through dynamic, web-based maps and interactive tools. By integrating multiple datasets and leveraging the Leaflet JavaScript library, the platform facilitates the display of data-driven geographic patterns. Its primary goal is to enhance understanding of spatial relationships.
 
 ### Class
 GEOG 575
