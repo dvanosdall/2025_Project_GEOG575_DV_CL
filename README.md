@@ -4,9 +4,7 @@
 ---
 
 ### Description
-**TBD:** A brief description of the project, what it does, and the purpose of the project. For example:
-
-This project is a [Project Type], designed to [specific function or goal]. It allows users to [key features and functionality].
+**TBD:** The final project proposal is a succinct overview of your design strategy, and is an essential step in your final project progress. The proposal serves three purposes: (1) apply lecture concepts to a real-world project of your design while getting experience responding to CfPs/RfPs (calls/requests for proposals), (2) negotiate expectations of the final project with us to ensure that your project is of sufficient merit and to avoid feature creep, and (3) allot time early in the design process to collaborative outline your conceptual design and team responsibilities before starting coding, ultimately saving you time. The proposal is organized into three sections.
 
 ### Class
 GEOG 575
@@ -63,11 +61,13 @@ To get the project up and running, follow these steps:
 ### Final Proposal
 **TBD**
 1. Persona/Scenario
-    1. Persona
-    2. Scenario
+The persona should include a description of a prototypical, target user and includes discussion of their interests and responsibilities (e.g., their job description if a professional/scientist; their motivation if part of the general public), with a specific focus on their key needs, expertise levels (across domains and technologies), and motivation. Your description of needs should connect directly to lecture discussion of goals, objectives, operands, and insights: in other words, describe their overarching goals, their primary tasks (objectives+operands), and key insights. You do not need to support all potential goals/tasks/insights, but make clear in your discussion which you believe you need to emphasize in your conceptual design.  The scenario then walks us through a hypothetical interaction session with your proposed interactive map, working through multiple stages of interaction loops. As you describe your scenario, relate the proposed functionality (representation designs and interaction operators) to user objectives using terminology from lecture. Your persona and scenario combined are limited to 1-page, single-spaced in the draft (although may grow beyond this in the final submission given discussion).
+---
 2. Requirements Document
-
-3. Wireframes
+Your persona/scenario description is accompanied with a requirements document outlining your proposed interactive map functionality. The requirements document mimics an actual response to an RfP, although is abbreviated in table format for the proposal deliverable. The requirements document should be divided according to representation (including data sources) and interaction. For the representation section, include each basemap tileset or context overlay as a separate row in the requirements document, providing: (1) an abbreviated title for the layer, (2) a description of the source, and (3) a description of the proposed symbolization. For the interaction section, include each unique interface widget as a separate row in the requirements document, providing: (1) an abbreviated title for the function, (2) coding by operator and operand (e.g., identify: time; organize functionality by operator), and (3) a description of the proposed interaction behavior and UI design. You will manage your project through the requirements document, so be comprehensive!
+---
+3. Lo-fi Wireframes
+Finally, provide a series of low-fidelity wireframes that walk through your use case scenario and that demonstrate the layout of your proposed functionality. A separate wireframe must be created for every new view generated in the use case scenario (i.e., for every interaction, or every click). The low-fidelity wireframes should be raw hand-drawn sketches for the draft, but more thoughtfully prepared designs for the final (e.g., use a ruler for straight edges, different colored markers for annotation). Please annotate all interactive functionality in the first wireframe using the terminology from the requirements document. All wireframes should be submitted as high quality scans.
 
 
 
