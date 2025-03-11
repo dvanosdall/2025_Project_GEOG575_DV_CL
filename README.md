@@ -60,14 +60,55 @@ To get the project up and running, follow these steps:
 
 ### Final Proposal
 **TBD**
-1. Persona/Scenario
-The persona should include a description of a prototypical, target user and includes discussion of their interests and responsibilities (e.g., their job description if a professional/scientist; their motivation if part of the general public), with a specific focus on their key needs, expertise levels (across domains and technologies), and motivation. Your description of needs should connect directly to lecture discussion of goals, objectives, operands, and insights: in other words, describe their overarching goals, their primary tasks (objectives+operands), and key insights. You do not need to support all potential goals/tasks/insights, but make clear in your discussion which you believe you need to emphasize in your conceptual design.  The scenario then walks us through a hypothetical interaction session with your proposed interactive map, working through multiple stages of interaction loops. As you describe your scenario, relate the proposed functionality (representation designs and interaction operators) to user objectives using terminology from lecture. Your persona and scenario combined are limited to 1-page, single-spaced in the draft (although may grow beyond this in the final submission given discussion).
----
-2. Requirements Document
-Your persona/scenario description is accompanied with a requirements document outlining your proposed interactive map functionality. The requirements document mimics an actual response to an RfP, although is abbreviated in table format for the proposal deliverable. The requirements document should be divided according to representation (including data sources) and interaction. For the representation section, include each basemap tileset or context overlay as a separate row in the requirements document, providing: (1) an abbreviated title for the layer, (2) a description of the source, and (3) a description of the proposed symbolization. For the interaction section, include each unique interface widget as a separate row in the requirements document, providing: (1) an abbreviated title for the function, (2) coding by operator and operand (e.g., identify: time; organize functionality by operator), and (3) a description of the proposed interaction behavior and UI design. You will manage your project through the requirements document, so be comprehensive!
----
-3. Lo-fi Wireframes
-Finally, provide a series of low-fidelity wireframes that walk through your use case scenario and that demonstrate the layout of your proposed functionality. A separate wireframe must be created for every new view generated in the use case scenario (i.e., for every interaction, or every click). The low-fidelity wireframes should be raw hand-drawn sketches for the draft, but more thoughtfully prepared designs for the final (e.g., use a ruler for straight edges, different colored markers for annotation). Please annotate all interactive functionality in the first wireframe using the terminology from the requirements document. All wireframes should be submitted as high quality scans.
+### 1. Persona & Scenario  
+   - **Persona:**  
+     - Description of a prototypical target user.  
+     - Includes interests, responsibilities, and expertise levels.  
+     - Discusses key needs, goals, objectives, operands, and insights.  
+     - Focus on specific tasks and motivations relevant to the project.  
+
+   - **Scenario:**  
+     - Walkthrough of a hypothetical user interaction with the interactive map.  
+     - Details multiple stages of interaction loops.  
+     - Connects functionality (representation designs & interaction operators) to user objectives.  
+     - Uses terminology from lectures to describe interaction goals and processes.  
+
+### 2. Requirements Document  
+   - **Purpose:**  
+     - Accompanies the persona/scenario description.  
+     - Mimics an RfP response in an abbreviated table format.  
+   
+   - **Representation Section:**  
+     - Lists each basemap tileset or context overlay as a separate row.  
+     - Includes:  
+       1. Abbreviated title for the layer.  
+       2. Data source description.  
+       3. Proposed symbolization details.  
+
+   - **Interaction Section:**  
+     - Lists each unique interface widget as a separate row.  
+     - Includes:  
+       1. Abbreviated function title.  
+       2. Categorization by operator and operand (e.g., identify: time).  
+       3. Description of interaction behavior and UI design.  
+
+   - **Management:**  
+     - The requirements document will guide the project's development.  
+
+### 3. Lo-fi Wireframes  
+   - **Purpose:**  
+     - Visual representation of the use case scenario.  
+     - Demonstrates layout and interaction design.  
+
+   - **Structure:**  
+     - A separate wireframe for each new view or interaction.  
+     - Draft phase: raw hand-drawn sketches.  
+     - Final phase: refined wireframes (ruler for straight edges, color markers for annotations).  
+
+   - **Annotations:**  
+     - First wireframe must annotate all interactive functionality.  
+     - Uses terminology from the requirements document.  
+     - Submitted as high-quality scans.  
 
 
 
