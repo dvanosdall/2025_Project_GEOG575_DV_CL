@@ -4,9 +4,7 @@
 ---
 
 ### Description
-**TBD:** A brief description of the project, what it does, and the purpose of the project. For example:
-
-This project is a [Project Type], designed to [specific function or goal]. It allows users to [key features and functionality].
+This collaborative project is an interactive geospatial analysis platform developed as part of the GEOG575 course. The project enables users to visualize, explore, and analyze spatial data through dynamic, web-based maps and interactive tools. By integrating multiple datasets and leveraging the Leaflet JavaScript library, the platform facilitates the display of data-driven geographic patterns. Its primary goal is to enhance understanding of spatial relationships.
 
 ### Class
 GEOG 575
@@ -66,6 +64,8 @@ To get the project up and running, follow these steps:
     1. Persona
     2. Scenario
 2. Requirements Document
+    1. Representation
+    2. Interaction
 
 3. Wireframes
 
