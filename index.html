@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-            <title></title>
 
-        <!--put your external stylesheet links here-->
-        <link rel="stylesheet" href="css/style.css">
-        <!--[if IE<9]>
-            <link rel="stylesheet" href="css/style.ie.css">
-        <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title></title>
+  <link rel="stylesheet" href="css/style.css?v4">
+</head>
 
-         <!--you can also place internal styles here;
-             place these within <style> tags-->
-        
-    </head>
+<body>
+  <div class="main-content">
+    <div class="content-wrapper">
+      <div class="map-wrapper">
+        <div class="dropdown-wrapper"></div>
+      </div>
+      <div class="chart-wrapper"></div>
+    </div>
+  </div>
 
-    <body>
-        <!--put your initial page content here-->
+  <!-- Modal for County Info -->
+  <div id="county-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>County Information</h2>
+      <table id="county-info-table">
+        <thead>
+          <tr>
+            <th>RegionID</th>
+            <th>SizeRank</th>
+            <th>RegionName</th>
+            <th>RegionType</th>
+            <th>StateName</th>
+            <th>State</th>
+            <th>StateCodeFIPS</th>
+            <th>MunicipalCodeFIPS</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-        <!--you can also use this space for internal scripts;
-        place these within <script> tags-->
+  <script src="lib/d3.v7.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+  <script type="module" src="js/driver.js"></script>
+</body>
 
-        <!--put your external script links here-->
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="lib/jquery-3.5.1.js"></script>
-    </body>
 </html>
