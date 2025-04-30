@@ -49,7 +49,6 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
         .style("width", "100%")
         .style("height", "100%");
 
-    console.log("svgWidth:", svgWidth, "svgHeight:", svgHeight);
 
     // background rect
     svg.append("rect")
@@ -62,32 +61,33 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
     const chart = svg.append("g")
         .attr("transform", translate);
 
-    // y scale
-    const minVal = d3.min(csvData, d => d[state.expressed]);
-    const maxVal = d3.max(csvData, d => d[state.expressed]);
-    const buffer = (maxVal - minVal) * 0.5;
 
-    const yScale = d3.scaleLinear()
-        .range([chartInnerHeight, 0])
-        .domain([minVal - buffer, maxVal + buffer]);
-
-    // sort data
-    csvData.sort((a, b) => b[state.expressed] - a[state.expressed]);
-
+    // X Scale
     const xScale = d3.scalePoint()
-        .domain(breaksArray)
-        .range([0, chartInnerWidth])
-        .padding(0.5);
+    .domain(breaksArray)
+    .range([0, chartInnerWidth])
+    .padding(0.5);
+    // Y scale
+    const minBreak = d3.min(breaksArray);
+        const maxBreak = d3.max(breaksArray);
+        const breakBuffer = (maxBreak - minBreak) * 0.25; // padding for first break
 
-    // // horizontal zero line
-    // chart.append("line")
-    //     .attr("class", "zero-line")
-    //     .attr("x1", 0)
-    //     .attr("x2", chartInnerWidth)
-    //     .attr("y1", yScale(0))
-    //     .attr("y2", yScale(0))
-    //     .attr("stroke", "#999")
-    //     .attr("stroke-dasharray", "4 2");
+        const yScale = d3.scaleLinear()
+        .domain([minBreak - breakBuffer, maxBreak])
+        .range([chartInnerHeight, 0]);
+
+    /*
+    chart.selectAll(".break-macho")
+        .data(breaksArray)
+        .enter()
+        .append("image")
+        .attr("class", "break-macho")
+        .attr("href", "img/macho02.png")
+        .attr("x", d => xScale(d) - 25)
+        .attr("y", d => yScale(d))
+
+
+    */
 
     // lollipop stems
     chart.selectAll(".break-line")
@@ -98,17 +98,28 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
         .attr("x2", d => xScale(d))
         .attr("y1", chartInnerHeight)
         .attr("y2", d => yScale(d))
+        .attr("width", 50)
+        .attr("height", d => chartInnerHeight - yScale(d))
+        .attr("preserveAspectRatio", "none")
+        .attr("width", d => {
+            const height = chartInnerHeight - yScale(d);
+            return Math.max(40, height * 0.15);  // trying to get the macho man's aspect ratio
+          })
+
         .attr("stroke", "#999")
+        .attr("stroke-width", 1)
         .on("mouseover", function (event, d) {
             const index = breaksArray.indexOf(d);
             const lowerBound = index === 0 ? d3.min(expressedValues) : breaksArray[index - 1];
             const upperBound = d;
             const formatDisplay = v => state.isRatioField ? `${formatNumber(v)}:1` : formatNumber(v);
+
             state.tooltip.transition().duration(200).style("opacity", 0.9);
             state.tooltip.html(`Range: ${formatDisplay(lowerBound)} – ${formatDisplay(upperBound)}`)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 20) + "px");
-            highlightCounties(d);
+              .style("left", (event.pageX + 10) + "px")
+              .style("top", (event.pageY - 20) + "px");
+
+            highlightCounties(lowerBound, upperBound);
         })
         .on("mouseout", function () {
             state.tooltip.transition().duration(200).style("opacity", 0);
@@ -120,6 +131,7 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
         .data(breaksArray)
         .enter()
         .append("circle")
+        .attr("class", "break-circle")
         .attr("cx", d => xScale(d))
         .attr("cy", d => yScale(d))
         .attr("r", getCircleRadius())
@@ -130,16 +142,19 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
             const lowerBound = index === 0 ? d3.min(expressedValues) : breaksArray[index - 1];
             const upperBound = d;
             const formatDisplay = v => state.isRatioField ? `${formatNumber(v)}:1` : formatNumber(v);
+
             state.tooltip.transition().duration(200).style("opacity", 0.9);
             state.tooltip.html(`Range: ${formatDisplay(lowerBound)} – ${formatDisplay(upperBound)}`)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 20) + "px");
-            highlightCounties(d);
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 20) + "px");
+
+            highlightCounties(lowerBound, upperBound);
         })
         .on("mouseout", function () {
             state.tooltip.transition().duration(200).style("opacity", 0);
             unhighlightCounties();
         });
+
 
     // Function to dynamically get circle radius based on screen size
     function getCircleRadius() {
@@ -152,15 +167,11 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
 
 // Create x-axis with ticks and rotation
 const xAxis = d3.axisBottom(xScale)
-    .tickFormat(function (d) {
-        const index = breaksArray.indexOf(d);
-        const upperBound = d; // upper bound is the current tick value
-        const formatDisplay = v => state.isRatioField ? `${formatNumber(v)}:1` : formatNumber(v);
-
-        // Round the upperBound before formatting
-        const roundedUpperBound = Math.round(upperBound);
-        return `< ${formatDisplay(roundedUpperBound)}`;
-    });
+  .tickFormat(d => {
+    const formatDisplay = v => state.isRatioField ? `${formatNumber(v)}:1` : formatNumber(v);
+    const rounded = Math.round(d);
+    return `< ${formatDisplay(rounded)}`;
+  });
 
 // x-axis group with transform, rotation, and font size adjustments
 chart.append("g")
@@ -174,16 +185,6 @@ chart.append("g")
     .style("fill", "white")
     .attr("y", 3)
     .attr("x", 8);
-
-// Create horizontal line at 0 on the y-axis (ensure it is visible)
-chart.append("line")
-    .attr("class", "x-axis-line")
-    .attr("x1", 0)
-    .attr("x2", chartInnerWidth)
-    .attr("y1", yScale(0)-3)
-    .attr("y2", yScale(0)-3)
-    .attr("stroke", "white")
-    .attr("stroke-width", 0.7);
 
 // y axis with dynamic font size
 const yAxis = d3.axisLeft(yScale).ticks(5);
@@ -204,7 +205,6 @@ chart.append("g")
     .style("font-weight", "600")
     .text("Home Sale Price");
 
-    console.log("chartInnerWidth:", chartInnerWidth, "chartInnerHeight:", chartInnerHeight);
 
     if (chartInnerWidth = -70) { chartInnerWidth = 0; } else { svgWidth - margin.left - margin.right;}
 
@@ -214,32 +214,6 @@ chart.append("g")
         .attr("width", chartInnerWidth)
         .attr("height", chartInnerHeight);
 
-    // chart title with dynamic font size
-    svg.append("text")
-    .attr("class", "chartTitle")
-    .attr("x", chartInnerWidth / 2)
-    .attr("y", 20)
-    .attr("text-anchor", "start")
-    .style("font-size", getFontSize())
-    .style("font-weight", "600")
-    .text(() => {
-        // Parse the date and format it to 'Month/Year'
-        const date = new Date(state.expressed);
-        const month = date.toLocaleString('default', { month: 'long' });
-        const year = date.getFullYear();
-        return `${month} ${year}`;
-    });
+    
 
-    // data source
-    // const leftPadding = margin.left + 10;
-    // svg.append("a")
-    //     .attr("xlink:href", "https://www.zillow.com/research/data/")
-    //     .attr("target", "_blank")
-    //     .append("text")
-    //     .attr("class", "attribution")
-    //     .attr("x", leftPadding)
-    //     .attr("y", svgHeight - 10)
-    //     .attr("text-anchor", "start")
-    //     .style("font-size", "0.7rem")
-    //     .style("fill", "#999")
 }

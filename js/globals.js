@@ -1,4 +1,5 @@
 // globals
+
 export const state = {
   map: null,
   projection: null,
@@ -10,4 +11,27 @@ export const state = {
   tooltip: null,
   isRatioField: false,
 };
+// Should prolly have a ui.js for stuff like this. I don't think much more will be added though
+export function initSidebarToggle() {
+  const sidebar = document.getElementById("sidebar");
+  const tab = document.getElementById("sidebar-tab");
+  const closeBtn = document.getElementById("close-sidebar");
+
+  if (!sidebar || !tab || !closeBtn) {
+    return;
+  }
+
+  // Open sidebar
+  tab.onclick = () => {
+    sidebar.classList.add("open");
+  };
+
+  // Close sidebar
+  closeBtn.onclick = () => {
+    sidebar.classList.remove("open");
+  };
+}
+
+initSidebarToggle();
+
 

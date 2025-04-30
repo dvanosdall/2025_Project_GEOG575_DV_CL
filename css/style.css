@@ -63,10 +63,12 @@ html, body {
 }
 
 .tooltip {
-  font-family: sans-serif;
-  font-size: small;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 9999; /* Make sure the tooltip is above other elements */
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+  z-index: 1000;
 }
 
 
@@ -102,7 +104,7 @@ html, body {
     appearance: none;
     -webkit-appearance: none; /* for Safari */
     -moz-appearance: none;    /* for Firefox */
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(204, 234, 213, 0.85);
     border: 1px solid #ccc;
     padding: 0.5em;
     border-radius: 6px;
@@ -150,7 +152,7 @@ html, body {
   .chart-wrapper {
     flex: 0 0 auto;
     width: 100%;
-    height: 25vh;
+    height: 30vh;
     background-color: rgba(0, 0, 0, 0.1);
     position: relative; /* Ensure the chart is positioned correctly */
     z-index: 10; /* Ensure it's above the map but does not block pins */
@@ -169,12 +171,9 @@ html, body {
   .content-wrapper {
       flex-direction: column; /* Stack vertically on wider screens */
   }
-  .chart-wrapper {
-      width: 100%; /* Full width of the container */
-      height: 25vh; /* Fixed height for the chart */
-  }
-  .map-wrapper {
-      flex: 1;  /* Take remaining space */
+  .slider-container, .chart-wrapper {
+    flex: 0 0 auto;
+    width: 100%;
   }
 }
 
@@ -234,8 +233,111 @@ td {
   background-color: #f9f9f9;
 }
 
+#sliderLabel {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
 
+.slider-container {
+  flex: 0 0 auto;
+  height: 1vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
+#timeSlider {
+  flex: 1;
+  min-width: 200px;
+  max-width: 600px;
+}
+
+#playButton, #sliderLabel {
+  white-space: nowrap;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sidebar closed (default) */
+.sidebar {
+  position: fixed;
+  top: 100px;
+  left: -250px;
+  width: 250px;
+  height: 50vh;
+  background-color: rgba(204, 234, 213, 0.85);
+  border-right: 2px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+  transition: left 0.3s ease, opacity 0.3s ease;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* When open, visible */
+.sidebar.open {
+  left: 0;
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 0 15px 4px rgba(100, 255, 100, 0.6);
+}
+
+/* Burger tab */
+#sidebar-tab {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #66c283;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 10000;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* When sidebar is open, hide burger */
+.sidebar.open + #sidebar-tab {
+  display: none;
+}
+
+.sidebar * {
+  transition: opacity 0.3s ease;
+}
+
+.county-entry .county-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.county-entry .remove-button {
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.county-entry .remove-button:hover {
+  color: #ccc;
+}
 
 
 

@@ -9,12 +9,31 @@
 </head>
 
 <body>
+  <!-- Hamburger toggle -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h3>Selected Counties</h3>
+      <span id="close-sidebar" style="cursor:pointer;font-size:24px;">&#60;</span>
+    </div>
+    <button id="download-csv-btn">Download CSV</button><br /><br />
+    <div id="county-list"></div>
+  </div>
+
+  <!-- Hamburger button -->
+  <div id="sidebar-tab">&#9776;</div>
+
+  <!-- Containers -->
   <div class="main-content">
     <div class="content-wrapper">
       <div class="map-wrapper">
         <div class="dropdown-wrapper"></div>
       </div>
-      <div class="chart-wrapper"></div>
+      <div class="slider-container">
+        <!-- slider HTML here -->
+      </div>
+      <div class="chart-wrapper">
+        <!-- chart HTML here -->
+      </div>
     </div>
   </div>
 

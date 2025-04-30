@@ -1,13 +1,12 @@
 const now = Date.now();
-// break browser cache ()
+// break cache for mobile testing
 Promise.all([
-  import(`./globals.js?v=${now}`),
-  import(`./map.js?v=${now}`),
-  import(`./chart.js?v=${now}`),
-  import(`./data.js?v=${now}`)
-]).then(([main, map, chart, data]) => {
-  // Start the app
+  import(`./globals.js?v=${Date.now()}`),
+  import(`./map.js?v=${Date.now()}`),
+  import(`./chart.js?v=${Date.now()}`),
+  import(`./data.js?v=${Date.now()}`)
+]).then(([globals, map, chart, data]) => {
   map.setMap();
 }).catch(err => {
-  console.error("Dynamic module load failed:", err);
+  console.error("Dynamic import error:", err);
 });
