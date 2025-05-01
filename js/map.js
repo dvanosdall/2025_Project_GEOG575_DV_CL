@@ -2,13 +2,8 @@ import { state } from './globals.js'
 import { callback, formatNumber } from "./data.js";
 
 /**
-     * Set up choropleth map
-     *
-     * Creates an SVG element for the map inside a container, sets up the
-     * geographic projection using d3.geoAlbers with specified parameters, and loads the
-     * required CSV and TopoJSON data files. Once all data is loaded, it calls the
-     * `callback` function to further process the data and render the map.
-     */
+ * Set up choropleth map
+ **/
 export function setMap() {
   const mapContainer = document.querySelector(".map-wrapper");
   const { width: svgWidth, height: svgHeight } = mapContainer.getBoundingClientRect();
@@ -24,14 +19,21 @@ export function setMap() {
 
   // create a group that will contain all map content
   state.mapGroup = state.map.append("g").attr("class", "map-group");
-
-  // set map projection (adjust scale for zoomed-in view)
+  // set map scale based on viewport size
+  const screenWidth = window.innerWidth;
+  const scale = screenWidth < 800
+    ? 4500
+    : screenWidth < 1500
+      ? 5500
+      : 8000;
+  
+  // map projesction
   state.projection = d3.geoAlbers()
-    .rotate([90, 0, 0]) // adjust rotation as needed
-    .center([0, 44.6])  // set center of the map
-    .parallels([42, 195])
-    .scale(8000) // set a higher scale value for a more zoomed-in view
-    .translate([svgWidth / 2, svgHeight / 2]);
+  .rotate([90, 0, 0])
+  .center([0, 44.6])
+  .parallels([42, 195])
+  .scale(scale)
+  .translate([svgWidth / 2, svgHeight / 2]);
 
   // set path generator
   state.path = d3.geoPath().projection(state.projection);
@@ -59,17 +61,8 @@ export function setMap() {
 }
 
 /**
-     * Draw counties and apply choropleth coloring
-     *
-     * Adds county paths using geojson data, applies fill color
-     * based on health data and color scale, and sets a glow filter
-     * for highlight effects
-     *
-     * @param {*} countiesFeatures - geojson features for counties
-     * @param {*} map - svg map container
-     * @param {*} path - d3 geoPath projection
-     * @param {*} breaksArray - classification breakpoints for coloring
-     */
+  * Draw counties and apply choropleth coloring
+  */
 
 export function setCounties(countiesFeatures, map, path, breaksArray) {
   const mapGroup = state.mapGroup;
@@ -153,6 +146,7 @@ export function setCounties(countiesFeatures, map, path, breaksArray) {
       d3.select(".tooltip").remove();
     }
   })
+  // click logic 
   .on("click", function (event, d) {
     const countyName = d.properties.NAME.toLowerCase().replace(" county", "").trim();
     const record = state.priceByCounty[countyName];
@@ -251,33 +245,11 @@ export function setCounties(countiesFeatures, map, path, breaksArray) {
     }
   });
 
-
-
-  /*  setCounties() gets called a lot and this would add a bunch of listeners
-
-      // Close the modal when the user clicks on the close button
-      d3.select(".close-btn").on("click", function () {
-          d3.select("#county-modal").style("display", "none");
-      });
-
-      // Close the modal when the user clicks anywhere outside the modal
-      window.onclick = function (event) {
-          if (event.target === document.getElementById("county-modal")) {
-              d3.select("#county-modal").style("display", "none");
-          }
-      };
-
-  */
 }
 
 /**
-    * HighlightCounties
-    *
-    * Highlights counties within a given classification break and displays
-    * dynamically placed labels using force simulation to avoid overlap.
-    *
-    * @param {*} breakValue - The data-break value to highlight.
-    */
+  * Highlights Counties
+  */
 
 
 export function highlightCounties(lowerBound, upperBound) {

@@ -13,22 +13,8 @@ function getFontSize() {
 
 /**
  * Create coordinated lollipop chart
- *
- * Builds an svg chart using viewBox + margins, draws lines and circles
- * for data breaks, adds y axis and dynamic title, and links to data source
- *
- * @param {*} csvData - parsed csv with numeric values
- * @param {*} colorScale - d3 color scale for styling breaks
- * @param {*} breaksArray - array of numeric break values
- * @param {*} expressedValues - cleaned list of values for the current variable
  */
 export function setChart(csvData, colorScale, breaksArray, expressedValues) {
-    // debugging statements
-    // console.log('csvData:', csvData);
-    // console.log('colorScale:', colorScale);
-    // console.log('breaksArray:', breaksArray);
-    // console.log('expressedValues:', expressedValues);
-
     // get wrapper size
     const chartContainer = document.querySelector(".chart-wrapper");
     const { width } = chartContainer.getBoundingClientRect();
@@ -76,19 +62,6 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
         .domain([minBreak - breakBuffer, maxBreak])
         .range([chartInnerHeight, 0]);
 
-    /*
-    chart.selectAll(".break-macho")
-        .data(breaksArray)
-        .enter()
-        .append("image")
-        .attr("class", "break-macho")
-        .attr("href", "img/macho02.png")
-        .attr("x", d => xScale(d) - 25)
-        .attr("y", d => yScale(d))
-
-
-    */
-
     // lollipop stems
     chart.selectAll(".break-line")
         .data(breaksArray)
@@ -103,7 +76,7 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
         .attr("preserveAspectRatio", "none")
         .attr("width", d => {
             const height = chartInnerHeight - yScale(d);
-            return Math.max(40, height * 0.15);  // trying to get the macho man's aspect ratio
+            return Math.max(40, height * 0.15); 
           })
 
         .attr("stroke", "#999")
@@ -155,8 +128,9 @@ export function setChart(csvData, colorScale, breaksArray, expressedValues) {
             unhighlightCounties();
         });
 
-
-    // Function to dynamically get circle radius based on screen size
+    /**
+     * Function to dynamically get circle radius based on screen size
+     */ 
     function getCircleRadius() {
         const screenWidth = window.innerWidth;
         if (screenWidth <= 600) { // Small screens (phones)
@@ -213,7 +187,4 @@ chart.append("g")
         .attr("class", "chartFrame")
         .attr("width", chartInnerWidth)
         .attr("height", chartInnerHeight);
-
-    
-
 }

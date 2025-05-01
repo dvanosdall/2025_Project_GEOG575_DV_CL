@@ -16,18 +16,6 @@ const pastelGreens = [
 
 /**
   * Processes the loaded CSV and TopoJSON data to render the map and chart.
-  *
-  * Callback function to convert TopoJSON data into GeoJSON features,
-  * generate a graticule, and make a color scale using Jenks or Quantile
-  * classification on the "Years of Potential Life Lost Rate" field from the CSV.
-  * It then draws the map elements (graticule, state boundaries, counties, and outline)
-  * and finally calls the setChart function to render the coordinated bar chart.
-  *
-  * @param {Array} data - An array containing the following:
-  *   [0]: CSV data,
-  *   [1]: TopoJSON for the outline,
-  *   [2]: TopoJSON for states,
-  *   [3]: TopoJSON for counties.
   */
 export function callback(data) {
   let breaksArray;
@@ -119,9 +107,6 @@ export function callback(data) {
 
 /**
  * Helper function to format a number with commas and up to 2 decimal places. Used for pop up styling
- *
- * @param {*} value
- * @returns
  */
 export function formatNumber(value) {
   return Number(value).toLocaleString(undefined, {
@@ -132,9 +117,6 @@ export function formatNumber(value) {
 
 /**
  * Make a dropdown menu for selecting real estate prices
- *
- * Populates options from attrArray, attaches event listener
- * to update the map and chart when selection changes
  */
 
 export function createDropdown() {
@@ -186,16 +168,6 @@ export function createDropdown() {
 
 /**
  * update the map and chart when a new attribute is selected
- *
- * clears old svg elements and re-renders everything fresh
- * function updateVis() {
-    // clear existing chart svg
-    d3.select(".chart-wrapper").selectAll("svg").remove();
-    // clear existing map svg
-    d3.select(".map-wrapper").selectAll("svg").remove();
-    // rebuild map (and chart via callback)
-    setMap();
-}
  */
 
 export function updateVis() {
@@ -253,7 +225,9 @@ export function updateVis() {
 
 }
 
-
+/**
+ * Function to create time lapse slider
+ */
 export function setSlider() {
   const chartWrapper = document.querySelector(".chart-wrapper");
 
@@ -318,7 +292,3 @@ export function setSlider() {
   });
 }
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleString('default', { month: 'short', year: 'numeric' });
-}

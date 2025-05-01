@@ -1,5 +1,5 @@
-const now = Date.now();
 // break cache for mobile testing
+const now = Date.now();
 Promise.all([
   import(`./globals.js?v=${Date.now()}`),
   import(`./map.js?v=${Date.now()}`),
